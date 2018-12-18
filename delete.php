@@ -14,6 +14,7 @@ if(! User::currentLoggedIn()) {
 
 $query = new SQLQuery();
 $person_id = DB::instance()->escapeString($_GET['id']);
+$query->table = "tbl_person";
 $query->condition = "person_id = {$person_id}";
 DB::instance()->delete($query);
 header("Location: index.php");

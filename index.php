@@ -7,7 +7,7 @@ $page = $_GET['page'] ?? 1;
 $rowsPerPage = 15;
 
 $query = new SQLQuery();
-$query->table = 'tbl_persons';
+$query->table = 'tbl_person';
 $personsCount = count(DB::instance()->getRows($query));
 $numOfPages = ceil($personsCount / $rowsPerPage);
 

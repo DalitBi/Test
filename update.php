@@ -34,7 +34,7 @@ if(isset($_POST['Person']))
 
     if($error === null) {
         $query = new SQLQuery();
-        $query->table = 'tbl_persons';
+        $query->table = 'tbl_person';
         $query->condition = "person_id = {$person_id}";
         $query->setParams = $personData;
         DB::instance()->update($query);
@@ -43,7 +43,7 @@ if(isset($_POST['Person']))
 }
 
 $query = new SQLQuery();
-$query->table = "tbl_persons";
+$query->table = "tbl_person";
 $query->condition = "person_id = {$person_id}";
 $person = DB::instance()->getRow($query);
 ?>
