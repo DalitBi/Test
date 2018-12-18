@@ -1,5 +1,15 @@
 <?php
 $mysqli = mysqli_connect("localhost");
+$person_attributes = [
+    'name',
+    'height',
+    'hair_color',
+    'skin_color',
+    'eye_color',
+    'birthyear',
+    'gender',
+];
+
 $fetchUrl = "https://swapi.co/api/people";
 do{
     $allPeople = json_decode(file_get_contents($fetchUrl), true);
@@ -8,12 +18,9 @@ do{
     {
         // Get only data column that are not array
         $dbColumns = [];
-        foreach($persons as $key => $value)
+        foreach($person_attributes as $attribute)
         {
-            if(is_array($value))
-                continue;
-
-            $dbColumns[$key] = "'".$value."'";
+            $dbColumns[$attribute] = "'".$person[$attribute]."'";
         }
         $mysqli->query("INERT INTO tbl_persons (person_id, ".implode(",", array_keys($dbColumns)).") VALUES (NULL, ".implode(",", $dbColumns).")");
         $fetchUrl = $allPeople['next'];
